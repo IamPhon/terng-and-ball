@@ -24,5 +24,6 @@ func (r *routerImpl) Routes() *mux.Router {
 	rt.HandleFunc("/signup", r.mh.HandleSignup()).Methods(http.MethodPost)
 	rt.HandleFunc("/signin", r.mh.HandleLogin()).Methods(http.MethodPost)
 	rt.HandleFunc("/member", r.mh.HandleGetUser()).Methods(http.MethodGet)
+	rt.Use(logging)
 	return rt
 }
