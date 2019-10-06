@@ -43,9 +43,13 @@ func (mh *memberHandlerImpl) HandleSignup() http.HandlerFunc {
 		}
 		signupReq := models.SignupRequest{}
 		json.Unmarshal(b, &signupReq)
-		fmt.Println("----------")
-		fmt.Println(signupReq)
 		// validation
+		if err := signupReq.Validate(); err != nil {
+			em := fmt.Sprintf(`{"error": "%s","code":400}`, err.Error())
+			w.Header().Add("content-type", "application/json")
+			w.Write([]byte(em))
+			return
+		}
 		handleResponse(w, mh.usecase.Signup(signupReq))
 	}
 }
