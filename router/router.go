@@ -2,7 +2,7 @@ package router
 
 import (
 	"net/http"
-	"test/member/handler"
+	"test/member/delivery/handler"
 
 	"github.com/gorilla/mux"
 )
