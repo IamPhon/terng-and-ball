@@ -21,7 +21,7 @@ func NewRouter(mh handler.MemberHandler) Router {
 
 func (r *routerImpl) Routes() *mux.Router {
 	rt := mux.NewRouter()
-	rt.HandleFunc("/signup", r.mh.HandleSignup()).Methods(http.MethodPost)
+	rt.HandleFunc("/signup", adapt(r.mh.HandleSignup(), validateContentType())).Methods(http.MethodPost)
 	rt.HandleFunc("/signin", r.mh.HandleLogin()).Methods(http.MethodPost)
 	rt.HandleFunc("/member", r.mh.HandleGetUser()).Methods(http.MethodGet)
 	rt.Use(logging)
